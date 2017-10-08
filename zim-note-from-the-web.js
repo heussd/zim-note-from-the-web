@@ -31,4 +31,27 @@ function download(filename, text) {
   document.body.removeChild(element);
 }
 
-download('ZIM_note_from_the_Web.txt', makeZimNote());
+
+// Taken from https://stackoverflow.com/questions/11652681/replacing-umlauts-in-js
+function deUmlaut(value){
+  value = value.toLowerCase();
+  value = value.replace(/ä/g, 'ae');
+  value = value.replace(/ö/g, 'oe');
+  value = value.replace(/ü/g, 'ue');
+  value = value.replace(/ß/g, 'ss');
+  value = value.replace(/ /g, '-');
+  value = value.replace(/\./g, '');
+  value = value.replace(/,/g, '');
+  value = value.replace(/\(/g, '');
+  value = value.replace(/\)/g, '');
+  return value;
+}
+
+function zimFriendlyName(filename) {
+	filename = deUmlaut(filename);
+	filename = filename.replace(/ /g, "_");
+	filename = filename.replace(/__/g, "_");
+	return filename;
+}
+
+download(zimFriendlyName(document.title) + '.txt', makeZimNote());

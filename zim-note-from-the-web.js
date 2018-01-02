@@ -10,9 +10,9 @@ function getSelectionText() {
 function makeZimNote() {
 	var text = "";
 	text = "Content-Type: text/x-zim-wiki\nWiki-Format: zim 0.4\n\n\n";
-	text = text.concat("-----\n");
-	text = text.concat(getSelectionText() + "\n");
-	text = text.concat("-----\n\n");
+	text = text.concat("'''");
+	text = text.concat(getSelectionText());
+	text = text.concat("'''\n\n");
 	text = text.concat(window.location.href + "\n");
 	text = text.concat(new Date());
   return text;
